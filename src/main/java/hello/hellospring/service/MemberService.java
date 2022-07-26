@@ -10,7 +10,12 @@ import java.util.Optional;
 public class MemberService {
 
     //회원 서비스를 만들기 위해서는 회원 레포지토리가 있어야함
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    // DI 방식
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     /**
      * 회원가입
@@ -32,7 +37,7 @@ public class MemberService {
     private void validateDuplicateMember(Member member) {
         memberRepository.findByName(member.getName())
                 .ifPresent(m -> {
-            throw new IllegalStateException("이미 존재하는 회원입니다");
+            throw new IllegalStateException("이미 존재하는 회원입니다.");
         });
     }
 
