@@ -1,9 +1,10 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
-
+import org.springframework.stereotype.Repository;
 import java.util.*;
 
+@Repository
 public class MemoryMemberRepository implements MemberRepository{
 
     private static Map<Long, Member> store = new HashMap<>(); //회원정보를 저장하기 위해, 키와 값을 저장할 변수

@@ -3,16 +3,22 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+//콤포넌트방식 : 스프링이 올라올 때, 콤포넌트와 관련된게 있다면 객체를 하나씩 만들어서 스프링에 등록해둠
+@Service // 스프링이 올라올 때 memberService를 서비스로 등록해줌
 public class MemberService {
 
     //회원 서비스를 만들기 위해서는 회원 레포지토리가 있어야함
     private final MemberRepository memberRepository;
 
-    // DI 방식
+    // Dependency Injection (의존성 주입) 방식
+    // 어떤 객체가 사용하는 의존 객체를 직접 만들어 사용하는게 아니라, 주입 받아 사용하는 방법
+    @Autowired //MemberService를 생성할 때, 스프링이, MemberRepository를 넣어줌
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
