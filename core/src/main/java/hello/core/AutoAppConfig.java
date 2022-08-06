@@ -6,6 +6,8 @@ import org.springframework.context.annotation.FilterType;
 
 @Configuration
 @ComponentScan(
+        //어디서부터 찾을지 지정해줄 수 있음
+        basePackages = "hello.core.member",
         //뺄 것을 미리 지정해줌 (annotation 에 Configuration 이라고 붙은 것을 뺄거라고 지정해둔 것)
         excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class)
 )
