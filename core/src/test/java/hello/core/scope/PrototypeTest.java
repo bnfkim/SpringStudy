@@ -14,14 +14,15 @@ public class PrototypeTest {
     void prototypeBeanFind() {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(PrototypeBean.class);
 
-        System.out.println();
+        System.out.println("find prototypeBean1");
         PrototypeBean prototypeBean1 = ac.getBean(PrototypeBean.class);
+        System.out.println("find prototypeBean2");
         PrototypeBean prototypeBean2 = ac.getBean(PrototypeBean.class);
 
-        System.out.println("singletonBean1 = " + singletonBean1);
-        System.out.println("singletonBean2 = " + singletonBean2);
+        System.out.println("prototypeBean1 = " + prototypeBean1);
+        System.out.println("prototypeBean2 = " + prototypeBean2);
 
-        Assertions.assertThat(singletonBean1).isSameAs(singletonBean2);
+        Assertions.assertThat(prototypeBean1).isNotSameAs(prototypeBean2);
 
         ac.close();
     }
