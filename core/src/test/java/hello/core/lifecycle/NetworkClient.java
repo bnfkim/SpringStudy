@@ -1,5 +1,8 @@
 package hello.core.lifecycle;
 
+import javax.annotation.PostConstruct; //다른 컨테이너를 쓴다 하더라도 지원함
+import javax.annotation.PreDestroy;
+
 public class NetworkClient {
 
     private String url;
@@ -26,12 +29,14 @@ public class NetworkClient {
         System.out.println("close: " + url);
     }
 
+    @PostConstruct //스프링에 등록되는 방법이 아님
     public void init() {
         System.out.println("NetworkClient.init");
         connect();
         call("초기화 연결 메시지");
     }
 
+    @PreDestroy
     public void close(){
         System.out.println("NetworkClient.close");
         disconnect();
