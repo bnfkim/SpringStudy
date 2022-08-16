@@ -14,15 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 public class LogDemoController {
 
     private final LogDemoService logDemoService;
-    private final ObjectProvider<MyLogger> myLoggerProvider; //myLogger을 주입받는게 아니라 찾을 수 있는 디펜더시가 생성됨
+    //private final ObjectProvider<MyLogger> myLoggerProvider; //myLogger 을 주입받는게 아니라 찾을 수 있는 디펜더시가 생성됨
+    private final MyLogger myLogger;
 
     @RequestMapping("log-demo")
     @ResponseBody
     public String logDemo(HttpServletRequest request) { //고객 요청 정보를 받을 수 있음
+        String requestURL = request.getRequestURL().toString(); //어떤 URL 로 들어왔는지 알 수 있음
+        //MyLogger myLogger = myLoggerProvider.getObject(); //필요한 시점에 myLogger 을 주입받음
 
-        String requestURL = request.getRequestURL().toString(); //어떤 URL로 들어왔는지 알 수 있음
-        MyLogger myLogger = myLoggerProvider.getObject(); //필요한 시점에 myLogger을 주입받음음
-        myLogger.setMyLogger(requestURL);
+        System.out.println("myLogger = " + myLogger.getClass());
+        myLogger.setRequestURL(requestURL);
+        System.out.println("myLogger = " + myLogger.getClass());
 
         myLogger.log("controller test");
         logDemoService.logic("testID");
